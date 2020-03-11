@@ -3,8 +3,8 @@ import tokens
 
 tokens = tokens.Toke()
 
-t_SE = r'se'
 t_FIM = r'fim'
+t_SE = r'(se)'
 t_ATE = r'até'
 t_LEIA = r'leia'
 t_MAIS = r'\+'
@@ -33,6 +33,7 @@ t_MULTIPLICACAO = r'\*'
 t_FECHA_COLCHETE = r'\]'
 t_ABRE_PARENTESE = r'\('
 t_FECHA_PARENTESE = r'\)'
+t_ID = r'\w+'
 
 def t_NUM_NOTACAO_CIENTIFICA(t):
     r'\d+\^+\d+'
@@ -47,11 +48,6 @@ def t_NUM_PONTO_FLUTUANTE(t):
 def t_NUM_INTEIRO(t):
     r'\d+'
     t.value = int(t.value)    
-    return t
-
-def t_ID(t):
-    r'[aA-zZ]+'
-    t.value = str(t.value)    
     return t
 
 def t_newline(t):

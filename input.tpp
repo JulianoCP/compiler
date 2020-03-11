@@ -1,1 +1,14 @@
-    1.2 + 2 - 2.5 > 24 && || ! := se então 10^2 
+inteiro principal():
+
+inteiro a
+inteiro b
+inteiro c
+
+a := 2
+b := 3
+
+c := a + b
+
+retorna c
+
+fim
