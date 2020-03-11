@@ -1,4 +1,5 @@
 import ply.lex as lex
+import ply.yacc as yacc
 import tokens
 
 tokens = tokens.Toke()
@@ -28,6 +29,8 @@ t_ATRIBUICAO = r':='
 t_DOIS_PONTOS = r':'
 t_MENOR_IGUAL = r'<='
 t_MAIOR_IGUAL = r'>='
+t_FECHA_CHAVES = r'\}'
+t_ABRE_CHAVES = r'\{'
 t_ABRE_COLCHETE = r'\['
 t_MULTIPLICACAO = r'\*'
 t_FECHA_COLCHETE = r'\]'
@@ -36,17 +39,17 @@ t_FECHA_PARENTESE = r'\)'
 t_ID = r'\w+'
 
 def t_NUM_NOTACAO_CIENTIFICA(t):
-    r'\d+\^+\d+'
+    r'(\+|-)?\d+\^+\d+'
     t.value = t.value    
     return t
 
 def t_NUM_PONTO_FLUTUANTE(t):
-    r'\d+\.\d+' 
+    r'(\+|-)?\d+\.\d+' 
     t.value = float(t.value)    
     return t
 
 def t_NUM_INTEIRO(t):
-    r'\d+'
+    r'(\+|-)?\d+'
     t.value = int(t.value)    
     return t
 
@@ -60,7 +63,6 @@ def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
 
-# Build the lexer
 lexer = lex.lex()
 
 def tokenize(data):

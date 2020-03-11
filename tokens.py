@@ -36,6 +36,8 @@ def Toke():
     'NUM_PONTO_FLUTUANTE',
     'NUM_NOTACAO_CIENTIFICA',
     'ID',
+    'ABRE_CHAVES',
+    'FECHA_CHAVES'
     )
 
     return tokens

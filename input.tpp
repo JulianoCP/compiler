@@ -1,14 +1,7 @@
-inteiro principal():
-
-inteiro a
-inteiro b
-inteiro c
-
-a := 2
-b := 3
-
-c := a + b
-
-retorna c
-
-fim
+{
+wqweqweqweqweqeqweqweqwe123124918
+2
+4712
+98421
+97561q298
+}
