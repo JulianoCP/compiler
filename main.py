@@ -13,7 +13,7 @@ t_MAIS = r'\+'
 t_MENOS = r'-'
 t_MENOR = r'<'
 t_MAIOR = r'>'
-t_IGUAL = r'='
+t_IGUAL = r'=='
 t_ENTAO = r'então'
 t_REPITA = r'repita'
 t_DIVISAO = r'/'
@@ -53,7 +53,9 @@ def t_NUM_PONTO_FLUTUANTE(t):
 
 ### Funcão que identifica numero inteiro ###
 def t_NUM_INTEIRO(t):
-    r'(-)?\d+'
+
+    r'((?<=\D)[+-]\d+)|(^(?<=\D)[+-]\d+)|\d+'
+
     t.value = int(t.value)    
     return t
 
@@ -81,7 +83,7 @@ def tokenize(data):
         tok = lexer.token()
         if not tok: 
             break      
-        print(tok.type)
+        print(tok.type,tok.value)
 
 ### Função principal ###
 def main():
