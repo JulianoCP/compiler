@@ -7,4 +7,9 @@ i := 4
 i := +4
 i := -4
 
-{qwew1241.qwe-12324qIUHiuqwhepoBQWBE8P!!@#!%#%#$%&%&$%&$%&@#$ASFD}
+inteiro principal()
+inteiro oi 
+(
+
+)
+{qweqwe}
