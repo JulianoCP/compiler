@@ -30,8 +30,6 @@ t_ATRIBUICAO = r':='
 t_DOIS_PONTOS = r':'
 t_MENOR_IGUAL = r'<='
 t_MAIOR_IGUAL = r'>='
-t_FECHA_CHAVES = r'\}'
-t_ABRE_CHAVES = r'\{'
 t_ABRE_COLCHETE = r'\['
 t_MULTIPLICACAO = r'\*'
 t_FECHA_COLCHETE = r'\]'
@@ -42,6 +40,12 @@ t_ID = r'\w+'
 ### Funcão que identifica valores cienticos ###
 def t_NUM_NOTACAO_CIENTIFICA(t):
     r'(-)?\d+\^(\d+)'
+    t.value = t.value    
+    return t
+
+### Funcão que identifica comentario ###
+def t_COMENTARIO(t):
+    r'\{.*\}'
     t.value = t.value    
     return t
 
