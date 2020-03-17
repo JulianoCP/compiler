@@ -1,0 +1,21 @@
+{
+    "name": "tpptheme",
+    "displayName": "tppTheme",
+    "description": "A theme for tpp lang",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.43.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "contributes": {
+        "themes": [
+            {
+                "label": "TPP THEME",
+                "uiTheme": "vs-dark",
+                "path": "./themes/TPP THEME-color-theme.json"
+            }
+        ]
+    }
+}
