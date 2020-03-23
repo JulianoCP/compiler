@@ -87,7 +87,7 @@ def tokenize(data):
         tok = lexer.token()
         if not tok: 
             break      
-        print(tok.type,tok.value)
+        print(tok.type)
 
 ### Função principal ###
 def main():
