@@ -12,7 +12,7 @@
     "contributes": {
         "themes": [
             {
-                "label": "TPP THEME",
+                "label": "Tpp Theme",
                 "uiTheme": "vs-dark",
                 "path": "./themes/TPP THEME-color-theme.json"
             }
