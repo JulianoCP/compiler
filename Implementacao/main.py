@@ -57,9 +57,7 @@ def t_NUM_PONTO_FLUTUANTE(t):
 
 ### Funcão que identifica numero inteiro ###
 def t_NUM_INTEIRO(t):
-
     r'((?<=\D)[+-]\d+)|(^(?<=\D)[+-]\d+)|\d+'
-
     t.value = int(t.value)    
     return t
 
@@ -80,9 +78,7 @@ lexer = lex.lex()
 
 ### Funcão para identificar os tokens ###
 def tokenize(data):
-
     lexer.input(data)
-
     while True:
         tok = lexer.token()
         if not tok: 
@@ -92,9 +88,8 @@ def tokenize(data):
 ### Função principal ###
 def main():
     
-    f = open("input.tpp","r")
-    data = str(f.read())
-
+    f = open("input.tpp","r",encoding='utf-8')
+    data = f.read()
     tokenize(data)
 
 if __name__ == '__main__':
