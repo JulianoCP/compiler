@@ -1,6 +1,7 @@
 import ply.lex as lex
 import ply.yacc as yacc
 import tokens
+import sys
 
 tokens = tokens.Toke()
 
@@ -39,7 +40,7 @@ t_ID = r'\w+'
 
 ### Funcão que identifica valores cienticos ###
 def t_NUM_NOTACAO_CIENTIFICA(t):
-    r'(-)?\d+\^(\d+)'
+    r'(-)?\d+\^(\d+)' #r'\d+\.?\d*e(+|-)?\d+'
     t.value = t.value    
     return t
 
@@ -88,8 +89,8 @@ def tokenize(data):
 ### Função principal ###
 def main():
     
-    f = open("input.tpp","r",encoding='utf-8')
-    data = f.read()
+    f = open(sys.argv[1])
+    data = str(f.read())
     tokenize(data)
 
 if __name__ == '__main__':
