@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
 import ply.lex as lex
 import ply.yacc as yacc
+import codecs
+import re
 import tokens
 import sys
 
@@ -7,17 +10,17 @@ tokens = tokens.Toke()
 
 t_FIM = r'fim'
 t_SENAO = r'senão'
-t_SE = r'(se)'
+t_SE = r'(se)[^\w+]'
 t_ATE = r'até'
 t_LEIA = r'leia'
 t_MAIS = r'\+'
 t_MENOS = r'-'
 t_MENOR = r'<'
 t_MAIOR = r'>'
-t_IGUAL = r'=='
+t_IGUAL = r'='
 t_ENTAO = r'então'
 t_REPITA = r'repita'
-t_DIVIDE = r'/'
+t_DIVISAO = r'/'
 t_VIRGULA = r','
 t_NEGACAO = r'!'
 t_ESCREVA = r'escreva'
@@ -32,11 +35,14 @@ t_DOIS_PONTOS = r':'
 t_MENOR_IGUAL = r'<='
 t_MAIOR_IGUAL = r'>='
 t_ABRE_COLCHETE = r'\['
-t_VEZES = r'\*'
 t_FECHA_COLCHETE = r'\]'
 t_ABRE_PARENTESE = r'\('
 t_FECHA_PARENTESE = r'\)'
-t_ID = r'\w+'
+t_MULTIPLICACAO = r'\*'
+#t_ID = r'\w+'
+
+### Ignorar tabulação ###
+t_ignore  = ' \t'
 
 ### Funcão que identifica valores cienticos ###
 def t_NUM_NOTACAO_CIENTIFICA(t):
@@ -46,9 +52,10 @@ def t_NUM_NOTACAO_CIENTIFICA(t):
 
 ### Funcão que identifica comentario ###
 def t_COMENTARIO(t):
-    r'\{.*\}'
-    t.value = t.value    
-    return t
+    r'(\{((.|\n)*?)\})'
+    t.lexer.lineno += t.value.count("\n")
+    #t.value = t.value    
+    #return t
 
 ### Funcão que identifica flutuante ###
 def t_NUM_PONTO_FLUTUANTE(t):
@@ -67,29 +74,32 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-### Ignorar tabulação ###
-t_ignore  = ' \t'
-
 ### Funcão que identifica  caracter invalido ###
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    line = t.lineno
+    print("Caracter inválido '%s'" % t.value[0])
     t.lexer.skip(1)
 
 lexer = lex.lex()
 
 ### Funcão para identificar os tokens ###
 def tokenize(data):
+    arq = open("tokenslex.py","w")
+    lista = []
     lexer.input(data)
     while True:
         tok = lexer.token()
         if not tok: 
             break      
         print(tok.type)
+        lista.append(tok.type)
+    tupla = tuple(lista)
+    arq.write(str(tupla))
+    arq.close()
 
 ### Função principal ###
 def main():
-    
-    f = open(sys.argv[1])
+    f = open(sys.argv[1],encoding = 'utf8')
     data = str(f.read())
     tokenize(data)
 
