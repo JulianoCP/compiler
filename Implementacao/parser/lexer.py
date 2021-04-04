@@ -39,7 +39,7 @@ t_FECHA_COLCHETE = r'\]'
 t_ABRE_PARENTESE = r'\('
 t_FECHA_PARENTESE = r'\)'
 t_MULTIPLICACAO = r'\*'
-#t_ID = r'\w+'
+t_ID = r'\w+'
 
 ### Ignorar tabulação ###
 t_ignore  = ' \t'

@@ -35,7 +35,7 @@ def Toke():
     'NUM_PONTO_FLUTUANTE',
     'NUM_NOTACAO_CIENTIFICA',
     'ID',
-    'COMENTARIO',
+    #'COMENTARIO',
     )
 
     return tokens
