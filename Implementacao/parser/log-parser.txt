@@ -5077,3 +5077,5 @@
    yacc.py:3462:shift/reduce conflict for MAIS in state 94 resolved as shift
    yacc.py:3462:shift/reduce conflict for MENOS in state 94 resolved as shift
    yacc.py:3462:shift/reduce conflict for error in state 128 resolved as shift
+tppparser.py: 297:Syntax error parsing index rule at line 6
+tppparser.py: 297:Syntax error parsing index rule at line 7

@@ -127,7 +127,21 @@ def p_indice_error(p):
     """indice : ABRE_COLCHETE error FECHA_COLCHETE
                 | indice ABRE_COLCHETE error FECHA_COLCHETE
     """
-    print("Erro na definicao do indice. Expressao ou indice.")
+
+    indice = 0 
+    for i in p:
+        indice +=1
+        
+    for i in range(7):
+        try:  
+            if str(p[i].type) == "ABRE_COLCHETE":
+                print("\nErro na definicao do indice line/col:({},{})".format(error_line,(p[i].lexpos)))
+            elif p[i].type in tokens and i == 2:
+                print("\nErro na definicao da expressão line/col:({},{})".format(error_line,(p[i].lexpos)))
+            else:
+                print("Erro na definicao do indice.")
+        except:
+            0
 
     error_line = p.lineno(1)
     father = MyNode(name='ERROR::{}'.format(error_line), type='ERROR')
@@ -817,27 +831,28 @@ def main():
     data = open(argv[1])
     source_file = data.read()
     parser.parse(source_file)
+    try:
+        if root and root.children != ():
+            print("Generating Syntax Tree Graph...")
+            DotExporter(root).to_picture(argv[1] + ".ast.png")
+            UniqueDotExporter(root).to_picture(argv[1] + ".unique.ast.png")
+            DotExporter(root).to_dotfile(argv[1] + ".ast.dot")
+            UniqueDotExporter(root).to_dotfile(argv[1] + ".unique.ast.dot")
+            print(RenderTree(root, style=AsciiStyle()).by_attr())
+            print("Graph was generated.\nOutput file: " + argv[1] + ".ast.png")
 
-    if root and root.children != ():
-        print("Generating Syntax Tree Graph...")
-        DotExporter(root).to_picture(argv[1] + ".ast.png")
-        UniqueDotExporter(root).to_picture(argv[1] + ".unique.ast.png")
-        DotExporter(root).to_dotfile(argv[1] + ".ast.dot")
-        UniqueDotExporter(root).to_dotfile(argv[1] + ".unique.ast.dot")
-        print(RenderTree(root, style=AsciiStyle()).by_attr())
-        print("Graph was generated.\nOutput file: " + argv[1] + ".ast.png")
+            DotExporter(root, graph="graph",
+                        nodenamefunc=MyNode.nodenamefunc,
+                        nodeattrfunc=lambda node: 'label=%s' % (node.type),
+                        edgeattrfunc=MyNode.edgeattrfunc,
+                        edgetypefunc=MyNode.edgetypefunc).to_picture(argv[1] + ".ast2.png")
 
-        DotExporter(root, graph="graph",
-                    nodenamefunc=MyNode.nodenamefunc,
-                    nodeattrfunc=lambda node: 'label=%s' % (node.type),
-                    edgeattrfunc=MyNode.edgeattrfunc,
-                    edgetypefunc=MyNode.edgetypefunc).to_picture(argv[1] + ".ast2.png")
+            DotExporter(root, nodenamefunc=lambda node: node.label).to_picture(argv[1] + ".ast3.png")
 
-        DotExporter(root, nodenamefunc=lambda node: node.label).to_picture(argv[1] + ".ast3.png")
-
-    else:
+        else:
+            print("Unable to generate Syntax Tree.")
+    except:
         print("Unable to generate Syntax Tree.")
-    print('\n\n')
 
 parser = yacc.yacc(method="LALR", optimize=True, start='programa', debug=True,
                    debuglog=log, write_tables=False, tabmodule='tpp_parser_tab')
