@@ -1,5 +1,5 @@
 # Como executar
-Para rodar o programa é simples entre na pasta implementação/parser, dentro do diretório
+Para rodar o compilador é simples entre na pasta implementação/parser, dentro do diretório
 Utilize o comando
 
 ```python3 tppparser.py 'arquivo .tpp'```
