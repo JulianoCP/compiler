@@ -1,9 +1,8 @@
 # Executar o compilador
-Para executar o compilador é simples, entre na pasta implementação/main, dentro do diretório
-Utilize o comando:
+Para executar o compilador é simples, entre no diretório 'implementação/main', dentro do diretório utilize o comando:
 
 ```
-python3 geracao_codigo.py arquivo .tpp
+python3 geracao_codigo.py arquivo.tpp
 ```
 
 # Dependências
