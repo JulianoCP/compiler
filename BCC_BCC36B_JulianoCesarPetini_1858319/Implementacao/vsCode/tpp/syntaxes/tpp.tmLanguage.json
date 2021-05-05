@@ -1,0 +1,75 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "tpp",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#tipos"
+		},
+		{
+			"include": "#funcao"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.tpp",
+				"match": "\\b(fim|se|senão|até|leia|então|repita)\\b"
+			}]
+		},
+		"comment": {
+			"name": "punctuation.definition.comment",
+			"begin": "\\{",
+			"end": "\\}",
+			"patterns": [
+				{
+					"name": "punctuation.definition.comment",
+					"match": "\\\\."
+				}
+			]
+		},
+		"funcao": {
+			"name": "entity.name.function",
+			"patterns": [
+				{
+					"name": "entity.name.function",
+					"match": "\\w+\\(\\)"
+				},
+				{
+					"name": "entity.name.function",
+					"match": "\\)"
+				},
+				{
+					"name": "entity.name.function",
+					"match": "\\("
+				},
+				{
+					"name": "entity.name.function",
+					"match": "\\w+\\("
+				}
+			]
+		},
+		"tipos": {
+			"patterns": [
+				{
+					"name": "constant.character",
+					"match": "inteiro|flutuante"
+				},
+				{
+					"name": "meta.tag",
+					"match": "escreva"
+				},
+				{
+					"name": "entity.name.tag",
+					"match": "retorno"
+				}
+			]
+		}
+	},
+	"scopeName": "source.tpp"
+}
