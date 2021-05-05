@@ -7,7 +7,7 @@ python3 geracao_codigo.py arquivo .tpp
 ```
 
 # Dependências
-Lembrando que você precisa ter em sua máquina as bibliotecas AnyTree, Python Ply, Graphviz, llvmlite.
+Lembrando que você precisa ter em sua máquina as bibliotecas AnyTree, Ply, Graphviz, llvmlite.
 
 ```Instalar as dependências
 pip install ply
