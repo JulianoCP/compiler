@@ -6,13 +6,13 @@ from mytree import MyNode
 from anytree.exporter import DotExporter, UniqueDotExporter
 from anytree import RenderTree, AsciiStyle
 
-logging.basicConfig(
-     level = logging.DEBUG,
-     filename = "log-parser.txt",
-     filemode = "w",
-     format = "%(filename)10s:%(lineno)4d:%(message)s"
-)
-log = logging.getLogger()
+# logging.basicConfig(
+#      level = logging.DEBUG,
+#      filename = "log-parser.txt",
+#      filemode = "w",
+#      format = "%(filename)10s:%(lineno)4d:%(message)s"
+# )
+# log = logging.getLogger()
 
 def p_programa(p):
     """programa : lista_declaracoes"""
@@ -355,6 +355,7 @@ def p_se(p):
         filho7 = MyNode(name='FIM', type='FIM', parent=pai)
         filho_fim = MyNode(name=p[7], type='FIM', parent=filho7)
         p[7] = filho7
+    
     else:
         filho5 = MyNode(name='fim', type='FIM', parent=pai)
         filho_fim = MyNode(name=p[5], type='FIM', parent=filho5)
@@ -829,6 +830,7 @@ def main():
         data = open(argv[1])
         source_file = data.read()
         parser.parse(source_file)
+
         # try:
         #     if root and root.children != ():
         #         UniqueDotExporter(root).to_picture(argv[1] + ".unique.ast.png")
@@ -838,8 +840,10 @@ def main():
         #     print("Error, unable to generate Syntax Tree")
     return root
 
-parser = yacc.yacc(method="LALR", optimize=True, start='programa', debug= False,
-                   debuglog=log, write_tables=False, tabmodule='tpp_parser_tab')
+parser = yacc.yacc(method="LALR", optimize=True, start='programa', debug= False, write_tables=False, tabmodule='tpp_parser_tab')
+
+# parser = yacc.yacc(method="LALR", optimize=True, start='programa', debug= False,
+#                    debuglog=log, write_tables=False, tabmodule='tpp_parser_tab')
   
 if __name__ == "__main__":
     main()

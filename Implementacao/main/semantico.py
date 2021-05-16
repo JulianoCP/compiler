@@ -6,6 +6,7 @@ from anytree import RenderTree, AsciiStyle
 import sintatico
 
 listOfIgnore = ["vazio",","]
+listOfCreateParent = ["var","numero"]
 
 listOfParents = []
 listOfTerminals = []
@@ -24,16 +25,16 @@ tempNewRoot = None
 tempOldRoot = None
 
 def runAllRules():
-    print("\n                                 - SAIDA DE ERROS -")
-    print("=====================================================================================\n")
+    #print("\n                                 - SAIDA DE ERROS -")
+    #print("=====================================================================================\n")
     r_declared_variable()
     r_main_func()
     r_declared_func()
     r_verify_assignment()
     r_callfunc_num_param()
     r_verify_read()
-    print("\n=====================================================================================\n")
-    table_generator()
+   # print("\n=====================================================================================\n")
+    #table_generator()
 
 def walkNodeTree(node):
     tempListOfTerminals.clear()
@@ -445,6 +446,8 @@ def chooseNewParent(name):
         "declaracao_variaveis": [1,True],
         "declaracao_funcao": [0,True],
         "cabecalho": [0,True],
+        "var": [0,True],
+        "numero": [0,True],
         "atribuicao": [1,True],
         "expressao_aditiva": [1,False],
         "lista_argumentos":[1,True],
@@ -491,17 +494,29 @@ def splitTree(node,parent):
     else:
         if parent != None and node != None:
             if node.name not in listOfIgnore:
-                node.parent = parent
+                if node.parent.parent.name in listOfCreateParent:
+                    if node.parent.parent.name == "numero":
+                        new_node = MyNode(name=node.parent.parent.name)
+                        new_node.parent = parent
+                        new_node_type = MyNode(name=node.parent.name)
+                        new_node_type.parent = new_node
+                        node.parent = new_node_type
+                    else:
+                        new_node = MyNode(name=node.parent.parent.name)
+                        new_node.parent = parent
+                        node.parent = new_node
+                else:
+                    node.parent = parent
 
 def tree_generator(root, parent):
     try:
         splitTree(root, createMainRoot())
     except:
         print("Error, unable to generate Semantics Tree")
-    try:
-        UniqueDotExporter(tempNewRoot).to_picture(argv[1] + ".resume.unique.ast.png")
-    except:
-        0
+    # try:
+    #     UniqueDotExporter(tempNewRoot).to_picture(argv[1] + ".resume.unique.ast.png")
+    # except:
+    #     0
 
 def main():
     try:
@@ -511,6 +526,8 @@ def main():
     except:
         print("Error, unable to generate Semantics Rules")
     tree_generator(root, None)
+
+    return [tempNewRoot,listOfTypes]
 
 if __name__ == "__main__":
     main()
